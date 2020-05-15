@@ -1,5 +1,6 @@
 import os
 import configparser
+from apps.TTFund.TTF_utils.common.log_utils import LogUtils
 
 
 class ConfigUtils(object):
@@ -8,6 +9,7 @@ class ConfigUtils(object):
         self.conf_path = os.path.join(self.current_path, conf_path)
         self.conf = configparser.ConfigParser()
         self.conf_data = self.conf.read(self.conf_path, encoding='utf-8')
+        self.logger = LogUtils.get_log()
 
     def tprint(self, name, value):
         print(name, type(value), value)
@@ -39,6 +41,14 @@ class ConfigUtils(object):
         '''
         return self.conf.get('url', 'full_info_url')
 
+    @property
+    def log_level(self):
+        '''
+            log等级
+        '''
+        return self.conf.get('logs', 'log_level')
+
+local_config = ConfigUtils()
 
 if __name__ == '__main__':
     c = ConfigUtils()
