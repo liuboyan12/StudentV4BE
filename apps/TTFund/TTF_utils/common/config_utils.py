@@ -1,6 +1,5 @@
 import os
 import configparser
-from apps.TTFund.TTF_utils.common.log_utils import LogUtils
 
 
 class ConfigUtils(object):
@@ -9,7 +8,6 @@ class ConfigUtils(object):
         self.conf_path = os.path.join(self.current_path, conf_path)
         self.conf = configparser.ConfigParser()
         self.conf_data = self.conf.read(self.conf_path, encoding='utf-8')
-        self.logger = LogUtils.get_log()
 
     def tprint(self, name, value):
         print(name, type(value), value)
@@ -47,6 +45,29 @@ class ConfigUtils(object):
             log等级
         '''
         return self.conf.get('logs', 'log_level')
+
+    @property
+    def position_url(self):
+        '''
+            持仓查询的url
+        '''
+        return self.conf.get('position_request', 'URL')
+
+    @property
+    def position_params(self):
+        '''
+            持仓查询的params
+        '''
+        _params_dict = {
+            'Accept': self.conf.get('position_request','Accept'),
+            'Accept-Encoding': self.conf.get('position_request','Accept-Encoding'),
+            'Accept-Language': self.conf.get('position_request','Accept-Language'),
+            'Connection': self.conf.get('position_request','Connection'),
+            'Host': self.conf.get('position_request','Host'),
+            'User-Agent': self.conf.get('position_request','User-Agent'),
+        }
+        return _params_dict
+
 
 local_config = ConfigUtils()
 

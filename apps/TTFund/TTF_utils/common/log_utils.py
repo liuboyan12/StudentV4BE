@@ -16,7 +16,7 @@ log_path = os.path.join(current_path, '../TTF_logs/log.txt')
 
 class LogUtils:
     def __init__(self, logger=None):
-        self.log_path = os.path.join(os.path.dirname(__file__), '../', local_config.log_path)
+        self.log_path = os.path.join(os.path.dirname(__file__), '../', log_path)
         self.log_file_path = os.path.join(os.path.dirname(__file__), '../logs')
         self.log_name = os.path.join(self.log_path, 'UITest_%s.log' % time.strftime("%Y-%m-%dT%H:%M:%S"))
         self.logger = logging.getLogger(logger)
